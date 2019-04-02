@@ -34,22 +34,27 @@ class FilterObject extends Component {
   }
 
 
-  filterObj = (userInput) => {
+  // filterObj = (input) => {
+  
+  //   this.setState({
+  //     filteredArray: this.state.unFilteredArray.filter((element)=>{
+  //       return element.input === this.state.input
+  //     })
+  //   })   
+
+  filterObj(prop) {
+    var employees = this.state.unFilteredArray;
+    var filteredEmployees = [];
     
-    // get property names
+    for ( var i = 0; i < employees.length; i++ ) {
+      if ( employees[i].hasOwnProperty(prop) ) {
+        filteredEmployees.push(employees[i]);
+      }
+    }
 
-    //if property name equals 
+    this.setState({ filteredArray: filteredEmployees });
+  }
 
-
-    this.setState({
-      filteredArray: this.state.unFilteredArray.filter((element)=>{
-        return element.userInput === this.state.userInput
-      })
-    })
-    
-    console.log(this.state.filteredArray) 
-
-}
 
 changeValue = (val) => {
   this.setState({
@@ -70,7 +75,7 @@ render() {
           e.target.value)
       }} />
       <button className="confirmationButton" onClick={() => { this.filterObj(this.state.userInput) }}>Button!</button>
-      <span className="resultsBox filterObjectRB"  ></span>
+      <span className="resultsBox filterObjectRB"  >{`${this.state.filteredArray}`}</span>
 
 
     </div>
